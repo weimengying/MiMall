@@ -1,18 +1,16 @@
 <template>
   <div>
-    <nav-header></nav-header>
-    <router-view></router-view>
+    <order-header></order-header>Cart
     <nav-footer></nav-footer>
   </div>
 </template>
 <script>
-import NavHeader from './../components/NavHeader'
+import OrderHeader from './../components/OrderHeader'
 import NavFooter from './../components/NavFooter'
-// @ is an alias to /src
 export default {
-  name: 'Home',
+  name: 'cart',
   components: {
-    NavHeader,
+    OrderHeader,
     NavFooter
   }
 }

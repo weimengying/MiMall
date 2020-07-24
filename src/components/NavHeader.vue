@@ -1,8 +1,8 @@
 <template>
-  <div>index</div>
+  <div>NavHeader</div>
 </template>
 <script>
 export default {
-  name: 'index'
+  name: 'nav-header'
 }
 </script>

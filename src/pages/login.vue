@@ -1,7 +1,8 @@
 <template>
-  <div></div>
+  <div>Login</div>
 </template>
 <script>
-export default {}
+export default {
+  name: 'login'
+}
 </script>
-<style></style>

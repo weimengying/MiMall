@@ -9,10 +9,12 @@
           <a href="javascript">协议规则</a>
         </div>
         <div class="tapbar-user">
-          <a href="javascript">登录</a>
-          <a href="javascript">注册</a>
+          <a href="javascript" v-if="username">{{username}}</a>
+          <a href="javascript" v-if="!username" @click="login">登录</a>
+          <a href="javascript" v-if="username" @click="logout">退出</a>
+          <a href="/#/order/list" v-if="username">我的订单</a>
           <a href="javascript" class="my-cart">
-            <span class="icon-cart"></span>购物车
+            <span class="icon-cart" @click="goToCart"></span>购物车
           </a>
         </div>
       </div>
@@ -22,20 +24,96 @@
         <div class="header-logo">
           <a href="/#/index"></a>
         </div>
-        <div class="header-menu"></div>
-        <div class="header-search"></div>
+        <div class="header-menu">
+          <div class="item-menu">
+            <span>小米</span>
+            <div class="children">
+              <ul>
+                <li class="product" v-for="(item,index) in phoneList" :key="index">
+                  <a :href="'/#/product/'+item.id" target="_blank">
+                    <div class="pro-img">
+                      <img :src="item.mainImage" :alt="item.subtitle" />
+                    </div>
+                    <div class="pro-name">{{item.name}}</div>
+                    <div class="pro-price">{{item.price | currency}}</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <a href target="_blank">
+                    <div class="pro-img">
+                      <img src="/imgs/nav-img/nav-3-1.jpg" alt />
+                    </div>
+                    <div class="pro-name">小米壁画电视65英寸</div>
+                    <div class="pro-price">6999元</div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="item-menu">
+            <span>RedMe红米</span>
+            <div class="children"></div>
+          </div>
+          <div class="item-menu">
+            <span>电视</span>
+            <div class="children"></div>
+          </div>
+        </div>
+        <div class="header-search">
+          <div class="wrapper">
+            <input type="text" name="keyword" />
+            <a href="javascript:;"></a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: 'nav-header'
+  name: 'nav-header',
+  data() {
+    return {
+      username: '',
+      phoneList: []
+    }
+  },
+  filters: {
+    currency(val) {
+      if (!val) return '0.00'
+      return '￥' + val.toFixed(2) + '元'
+    }
+  },
+  methods: {
+    login() {
+      this.$router.push('/login')
+    },
+    logout() {},
+    goToCart() {
+      this.$router.push('/cart')
+    },
+    getProductList() {
+      this.axios
+        .get('/products', {
+          params: {
+            categoryId: '100012',
+            pageSize: 6
+          }
+        })
+        .then(res => {
+          this.phoneList = res.list
+        })
+    }
+  },
+  mounted() {
+    this.getProductList()
+  }
 }
 </script>
 <style lang="scss">
 @import './../assets/scss/base.scss';
 @import './../assets/scss/config.scss';
+@import './../assets/scss/mixin.scss';
 .header {
   .nav-topbar {
     height: 39px;
@@ -43,12 +121,7 @@ export default {
     background-color: #333;
     color: #b0b0b0;
     .container {
-      width: 1226px;
-      margin-right: auto;
-      margin-left: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include flex();
       a {
         display: inline-block;
         color: #b0b0b0;
@@ -61,44 +134,112 @@ export default {
         color: #fff;
         margin-right: 0;
         .icon-cart {
-          background: url('/imgs/icon-cart-checked.png') no-repeat center;
-          width: 16px;
-          height: 12px;
+          @include bgImg(16px, 12px, '/imgs/icon-cart-checked.png');
           margin-right: 4px;
-          background-size: contain;
-          display: inline-block;
         }
       }
     }
   }
   .nav-header {
     .container {
-      .header-logo {
+      position: relative;
+      height: 112px;
+      @include flex();
+      .header-menu {
         display: inline-block;
-        width: 55px;
-        height: 55px;
-        background-color: #ff6600;
-        a {
+        width: 643px;
+        padding-left: 209px;
+        .item-menu {
           display: inline-block;
-          width: 110px;
-          height: 55px;
-          &:before {
-            content: ' ';
-            width: 55px;
-            height: 55px;
-            background: url('/imgs/mi-logo.png') no-repeat center;
-            background-size: 55px;
+          color: #333;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 112px;
+          margin-right: 20px;
+          span {
+            cursor: pointer;
           }
-          &:after {
-            content: ' ';
-            width: 55px;
-            height: 55px;
-            background: url('/imgs/mi-home.png') no-repeat center;
-            background-size: 55px;
+          &:hover {
+            color: $colorA;
+            .children {
+              height: 220px;
+              opacity: 1;
+            }
           }
-          &:hover:before {
-            margin-left: -55px;
-            transition: margin 0.2s;
+          .children {
+            position: absolute;
+            top: 112px;
+            left: 0;
+            width: 1226px;
+            height: 0;
+            // opacity: 0;
+            overflow: hidden;
+            border-top: 1px solid #e5e5e5;
+            box-shadow: 0px 7px 6px 0 rgba(0, 0, 0, 0.11);
+            z-index: 10;
+            transition: all 0.5s;
+            background-color: #fff;
+            .product {
+              position: relative;
+              float: left;
+              width: 16.6%;
+              height: 220px;
+              font-size: 12px;
+              line-height: 12px;
+              text-align: center;
+              a {
+                display: inline-block;
+              }
+              img {
+                width: auto;
+                height: 111px;
+                margin-top: 26px;
+              }
+              .pro-img {
+                height: 137px;
+              }
+              .pro-name {
+                font-weight: bold;
+                margin-top: 19px;
+                margin-bottom: 8px;
+                color: $colorB;
+              }
+              .pro-price {
+                color: $colorA;
+              }
+              &:before {
+                content: ' ';
+                position: absolute;
+                top: 28px;
+                right: 0;
+                border-left: 1px solid $colorF;
+                height: 100px;
+              }
+              &:last-child:before {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+      .header-search {
+        width: 319px;
+        .wrapper {
+          height: 50px;
+          border: 1px solid #e0e0e0;
+          display: flex;
+          align-items: center;
+          input {
+            border: none;
+            box-sizing: border-box;
+            border-right: 1px solid #e0e0e0;
+            width: 264px;
+            height: 50px;
+            padding-left: 14px;
+          }
+          a {
+            @include bgImg(18px, 18px, '/imgs/icon-search.png');
+            margin-left: 17px;
           }
         }
       }

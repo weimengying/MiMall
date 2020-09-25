@@ -4,18 +4,20 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+// const mock = true
+
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 
-//根据前端的跨域方式做调整 /a/b :/api/a/b=> /a/b
-axios.defaults.baseURL = '/api'
+// 根据前端的跨域方式做调整 /a/b :/api/a/b=> /a/b
+axios.defaults.baseURL = 'http://mall-pre.springboot.cn';
 axios.defaults.timeout = 8000;
-//接口错误拦截
+// 接口错误拦截
 axios.interceptors.response.use(function (response) {
   let res = response.data
   if (res.status == 0) { //成功
     return res.data;
-  } else if (res.status == 10) {//未登录
+  } else if (res.status == 10) { //未登录
     window.location.href = '/#/login'
   } else {
     alert(res.msg)

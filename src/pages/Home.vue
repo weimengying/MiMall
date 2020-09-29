@@ -10,7 +10,7 @@ import NavHeader from './../components/NavHeader'
 import NavFooter from './../components/NavFooter'
 // @ is an alias to /src
 export default {
-  name: 'home',
+  name: 'nav-home',
   components: {
     NavHeader,
     NavFooter

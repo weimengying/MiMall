@@ -1,5 +1,5 @@
 # mimall
-仿小米官网项目
+使用Vue仿小米官网项目
 项目体验链接：http://mi.futurefe.com
 ## Project setup
 ```

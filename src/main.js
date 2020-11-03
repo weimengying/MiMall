@@ -5,6 +5,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueLazyload from 'vue-lazyload'
 import VueCookie from 'vue-cookie'
+import store from './store'
 import { Message } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -39,6 +40,7 @@ axios.interceptors.response.use(function(response) {
   return Promise.reject(error)
 })
 new Vue({
+  store,
   router,
   render: h => h(App)
 }).$mount('#app')

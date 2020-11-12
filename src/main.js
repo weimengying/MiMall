@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -8,6 +7,7 @@ import VueCookie from 'vue-cookie'
 import store from './store'
 import { Message } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import App from './App.vue'
 
 // const mock = true
 Vue.use(VueLazyload, {
@@ -16,6 +16,8 @@ Vue.use(VueLazyload, {
 Vue.use(VueAxios, axios)
 Vue.use(VueCookie)
 Vue.config.productionTip = false
+// 按需加载
+Vue.prototype.$message = Message
 
 // 根据前端的跨域方式做调整 /a/b :/api/a/b=> /a/b
 axios.defaults.baseURL = '/api'

@@ -95,7 +95,10 @@ export default {
         this.showSlide = ''
       }, 600)
     },
-    buy() {}
+    buy() {
+      const id = this.$route.params.id
+      this.$router.push(`/detail/${id}`)
+    }
   }
 }
 </script>

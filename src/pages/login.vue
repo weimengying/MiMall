@@ -90,7 +90,7 @@ export default {
         password: 'admin1',
         email: 'admin1@163.com'
       }).then((res) => {
-       alert('注册成功')
+       this.$message.success('注册成功')
       })
     }
   }

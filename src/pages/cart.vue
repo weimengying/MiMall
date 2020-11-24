@@ -9,7 +9,7 @@
       <div class="container">
         <div class="cart-box">
           <ul class="cart-item-head">
-            <li class="col-1"><span class="checkbox" v-bind:class="{'chexked':allChecked}" @click="toggleAll"></span>全选</li>
+            <li class="col-1"><span class="checkbox" v-bind:class="{'checked':allChecked}" @click="toggleAll"></span>全选</li>
             <li class="col-3">商品名称</li>
             <li class="col-1">单价</li>
             <li class="col-2">数量</li>
@@ -118,13 +118,20 @@ export default {
     },
     // 控制全选功能
     toggleAll() {
-      const url = this.allChecked ? '/cart/unSelectAll' : '/carts/selectAll'
+      const url = this.allChecked ? '/carts/unSelectAll' : '/carts/selectAll'
       this.axios.put(url).then((res) => {
         this.renderData(res)
       })
     },
     // 购物车下单
-    order() {},
+    order() {
+      const isCheck = this.list.every(item => !item.productSelected)
+      if (isCheck) {
+        this.$message.warning('请选择一件商品')
+      } else {
+        this.$router.push('/order/confirm')
+      }
+    },
     // 删除购物车商品
     delProduct(item) {
       this.axios.delete(`/carts/${item.productId}`).then((res) => {
@@ -154,7 +161,7 @@ export default {
           vertical-align: middle;
           margin-right:17px;
           cursor: pointer;
-          &.checkbox{
+          &.checked{
             background:url('/imgs/icon-gou.png') #ff6600 no-repeat center;
             background-size:16px 12px;
             border:none;

@@ -119,10 +119,19 @@ export default {
         .then(res => {
           this.phoneList = res.list
         })
-    }
+    },
+    getCartCount() {
+      this.axios.get('/carts/products/sum').then((res = 0) => {
+          this.$store.dispatch('saveCartCount', res)
+        })
+      }
   },
   mounted() {
     this.getProductList()
+    const params = this.$route.params
+    if (params && params.from === 'login') {
+      this.getCartCount()
+    }
   }
 }
 </script>

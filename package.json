@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
+    "qrcode": "^1.4.4",
     "swiper": "^6.3.2",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",

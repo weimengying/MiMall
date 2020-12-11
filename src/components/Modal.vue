@@ -5,7 +5,7 @@
           <div class="modal-dialog">
               <div class="modal-header">
               <span>{{title}}</span>
-              <a href="javascript:;" class="icon-close" @click="$emit('cancle')"></a>
+              <a href="javascript:;" class="icon-close" v-on:click="$emit('cancel')"></a>
               </div>
               <div class="modal-body">
               <slot name="body"></slot>

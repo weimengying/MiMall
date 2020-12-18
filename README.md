@@ -45,29 +45,18 @@ https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_5
 ### 首页
 ![index.png](./resource/screenshots/index.png)
 ### 登录页
-![user.png](./screenshots/user.png)
-### 权限管理-角色列表
-![right-role.png](./screenshots/right-role.png)
-### 权限管理-角色列表（分配权限）
-![right-role-set.png](./screenshots/right-role-set.png)
-### 权限管理-权限列表
-![power-right.png](./screenshots/power-right.png)
-### 商品管理-商品列表
-![goods-list.png](./screenshots/goods-list.png)
-### 商品管理-商品列表（添加）
-![goods-add.png](./screenshots/goods-add.png)
-### 商品管理-分类参数
-![goods-cate.png](./screenshots/goods-cate.png)
-![goods-cate-params.png](./screenshots/goods-cate-params.png)
-### 商品管理-商品分类
-![goods-params.png](./screenshots/goods-params.png)
-### 订单管理-订单列表
-![order-list.png](./screenshots/order-list.png)
-### 订单管理-订单列表(物流信息)
-![order-position.png](./screenshots/order-position.png)
-### 订单管理-订单列表(修改订单地址)
-![order-address.png](./screenshots/order-address.png)
-### 数据统计-数据报表（添加）
-![report.png](./screenshots/report.png)
+![login.png](./resource/screenshots/login.png)
+### 产品站页面
+![product.png](./resource/screenshots/product.png)
+### 商品详情页面
+![product-detail.png](./resource/screenshots/product-detail.png)
+### 购物车列表页面
+![cart.png](./resource/screenshots/cart.png)
+### 订单确认页面
+![orderConfirm.png](./resource/screenshots/orderConfirm.png)
+### 订单结算页面
+![orderPay.png](./resource/screenshots/orderPay.png)
+### 订单列表页面
+![orderList.png](./resource/screenshots/orderList.png)
 
 
